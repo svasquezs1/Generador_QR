@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Generador de Código QR</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Generador de Código QR</h1>
+    <form id="qrForm" method="POST" action="/">
+      <label for="url">Ingresa la URL:</label>
+      <div class="input-group">
+        <input type="url" id="url" name="url" placeholder="https://ejemplo.com" required>
+        <button type="submit">Generar</button>
+      </div>
+    </form>
+
+    {% if error %}
+      <p class="error">{{ error }}</p>
+    {% endif %}
+
+    {% if url %}
+      <div class="result">
+        <h2>Código QR De:</h2>
+        <a href="{{ url }}" target="_blank">{{ url }}</a>
+        <div class="qr-card">
+          <img id="qrCode" src="{{ url_for('qr_image', url=url) }}" alt="Código QR">
+        </div>
+        <a class="download-btn" href="{{ url_for('qr_image', url=url) }}" download="qrcode.png">
+          Descargar QR ⤓
+        </a>
+      </div>
+    {% endif %}
+  </div>
+
+  <script>
+    document.getElementById("qrForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const urlValue = document.getElementById("url").value.trim();
+      if (!urlValue) return;
+      const img = document.getElementById("qrCode");
+      if (img) {
+        img.src = `/qr_image?url=${encodeURIComponent(urlValue)}`;
+      } else {
+        this.submit();
+      }
+    });
+  </script>
+</body>
+</html>

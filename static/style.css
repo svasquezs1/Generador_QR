@@ -1,0 +1,165 @@
+/* Variables de color */
+:root {
+  --bg-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --accent: #2575fc;
+  --accent-hover: #1a5bb8;
+  --text: #333;
+  --error: #e74c3c;
+}
+
+/* Reset base y tipografía */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg-gradient);
+  color: var(--text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 1em;
+}
+
+/* 1) Contenedor a pantalla completa sin scroll */
+.container {
+  background: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  max-width: 480px;
+  width: 100%;
+  /* Eliminamos el margin-top y bottom para que encaje justo en la ventana */
+  margin: 0 auto;
+  padding: 2em;
+  text-align: center;
+  animation: fadeIn 0.6s ease-out;
+}
+
+.result a.download-btn {
+  color: #fff;   
+  text-decoration: none;
+}
+
+/* 2) Forzar salto de línea en cada sección del resultado */
+.result h2,
+.result .qr-card,
+.result .download-btn {
+  /* Cada uno como bloque ocupa toda la línea */
+  display: block;
+  /* Separación vertical */
+  margin-top: 1.5em;
+}
+
+/* 3) Ajustar la tarjeta del QR para que sea block y centrada */
+.qr-card {
+  display: block;        /* antes era inline-block */
+  margin: 1em auto;      /* auto centra dentro de .container */
+  color: #e74c3c;
+}
+
+/* 4) Botón de descarga en su propia línea y centrado */
+.download-btn {
+  display: inline-block;
+  margin: 1.5em auto 0;
+}
+
+/* Encabezados */
+h1 {
+  font-weight: 700;
+  margin-bottom: 0.5em;
+  color: #444;
+}
+h2 {
+  margin-top: 1.5em;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+/* Formulario */
+form {
+  margin-bottom: 1em;
+}
+label {
+  display: block;
+  margin-bottom: 0.5em;
+  font-weight: 500;
+}
+.input-group {
+  display: flex;
+  gap: 0.5em;
+}
+.input-group input {
+  flex: 1;
+  padding: 0.75em 1em;
+  border: 2px solid #ccc;
+  border-radius: 8px;
+  font-size: 1em;
+  transition: border-color 0.3s;
+}
+.input-group input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* Botones */
+button, .download-btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 0.75em 1.5em;
+  font-size: 1em;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+button:hover, .download-btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  color: #fff;
+}
+
+/* Mensajes de error */
+.error {
+  color: var(--error);
+  margin-top: 0.5em;
+  font-weight: 500;
+}
+
+/* Resultado QR */
+.result {
+  margin-top: 1em;
+  justify-items: center;
+}
+.result a {
+  color: var(--accent);
+  word-break: break-all;
+}
+.qr-card {
+  background: #f1f1f1;
+  padding: 1em;
+  border-radius: 12px;
+  display: inline-block;
+  margin: 1em 0;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+  animation: zoomIn 0.4s ease-out;
+}
+.qr-card img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes zoomIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to   { opacity: 1; transform: scale(1); }
+}
